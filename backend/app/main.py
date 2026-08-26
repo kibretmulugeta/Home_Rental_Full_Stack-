@@ -63,6 +63,11 @@ app.include_router(reports.router, prefix=settings.API_V1_STR)
 app.include_router(admin.router, prefix=settings.API_V1_STR)
 app.include_router(webhooks.router, prefix=settings.API_V1_STR)
 
+@app.get("/health")
+@app.get(f"{settings.API_V1_STR}/health")
+def health_check():
+    return {"status": "healthy", "service": settings.PROJECT_NAME, "version": "1.0.0"}
+
 @app.get("/")
 def root():
     return {
